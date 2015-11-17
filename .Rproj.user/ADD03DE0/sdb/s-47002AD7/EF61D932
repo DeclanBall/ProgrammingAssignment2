@@ -1,0 +1,17 @@
+{
+    "contents" : "##The following function creates a \"special\" matrix that has the ability to cache its inverse.\n\nmakeCacheMatrix <- function(x = matrix()) {\n       \n  specialmatrix <- NULL\n  set <- function(y) {\n    x <<- y                         ## assigns y to x in a seperate environment\n    specialmatrix <<- NULL          ## assigns NULL to specialmatrix in a seperate environment\n  }\n  \n  get <- function() x\n  setinverse <- function(solve) specialmatrix <<- solve\n  getinverse <- function() specialmatrix\n  list(set = set, get = get, setinverse = setinverse, getinverse = getinverse)\n  # This makes a list containing a function to set the value of the matrix, get the value of the\n  # matrix, set the value of the inverse matrix and get the value of the inverse matrix.\n}\n\n\n## The following function will first check to see if the inverse of the \"set\" matrix has already\n## been calculated, if it has then it will \"get\" the result from the cache. If not then it will\n## compute the inverse and cache it.\n\ncacheSolve <- function(x, ...) {\n  \n  specialmatrix <- x$getinverse()          ## So this section will seek to return a cached\n  if(!is.null(specialmatrix)) {            ## solution for the inverse of the matrix\n    message(\"getting cached data\")         ## as long as the solution does not return a \n    return(specialmatrix)                  ## NULL response.\n  }\n  \n  matrixdata <- x$get()                       ## Should a NULL response be the case, this section\n  specialmatrix <- solve(matrixdata, ...)     ## will compute the inverse, cache the result using \n  x$setinverse(specialmatrix)                 ## x$setmatrix and return the result.\n  specialmatrix\n}\n",
+    "created" : 1447709571493.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2384847791",
+    "id" : "EF61D932",
+    "lastKnownWriteTime" : 1447773807,
+    "path" : "~/GitHub/ProgrammingAssignment2/cachematrix.R",
+    "project_path" : "cachematrix.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
